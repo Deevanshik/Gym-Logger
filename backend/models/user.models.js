@@ -4,8 +4,8 @@ const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true },
     email: { type: String, required: true },
-    password: { type: String, required: true },
-    refreshToken: String,
+    password: { type: String, required: true, select: false },
+    refreshToken: { type: String, select: false },
   },
   { timestamps: true },
 );
