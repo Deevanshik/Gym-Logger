@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const splitSchema = new mongoose.Schema(
   {
     userId: {

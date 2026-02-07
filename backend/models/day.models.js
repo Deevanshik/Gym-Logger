@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const daySchema = new mongoose.Schema(
   {
     splitId: {
@@ -12,6 +14,5 @@ const daySchema = new mongoose.Schema(
 );
 
 daySchema.index({ splitId: 1 });
-daySchema.index({ splitId: 1, order: 1 });
 
 export default mongoose.model("Day", daySchema);
