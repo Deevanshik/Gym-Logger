@@ -1,5 +1,5 @@
-import Split from "../models/split.models.js";
-import Day from "../models/day.models.js";
+import Split from "../models/split.model.js";
+import Day from "../models/day.model.js";
 
 export const createSplit = async (req, res, next) => {
   try {

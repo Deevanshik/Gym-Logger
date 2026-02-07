@@ -5,9 +5,9 @@ import {
   getExerciseTemplateById,
   updateExerciseTemplate,
   deleteExerciseTemplate,
-} from "../controllers/exerciseTemplate.controllers.js";
+} from "../controllers/exerciseTemplate.controller.js";
 
-import authenticate from "../middlewares/auth.middlewares.js";
+import authenticate from "../middlewares/auth.middleware.js";
 
 const router = Router();
 

@@ -5,9 +5,9 @@ import {
   getSplitById,
   updateSplit,
   deleteSplit,
-} from "../controllers/splits.controllers.js";
+} from "../controllers/splits.controller.js";
 
-import authenticate from "../middlewares/auth.middlewares.js";
+import authenticate from "../middlewares/auth.middleware.js";
 
 const router = Router();
 

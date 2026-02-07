@@ -1,8 +1,8 @@
 import express from "express";
-import authRoutes from "./routes/auth.routes.js";
-import userRoutes from "./routes/users.routes.js";
-import exerciseTemplateRoutes from "./routes/exerciseTemplate.routes.js";
-import splitsRoutes from "./routes/splits.routes.js";
+import authRoutes from "./routes/auth.route.js";
+import userRoutes from "./routes/users.route.js";
+import exerciseTemplateRoutes from "./routes/exerciseTemplate.route.js";
+import splitsRoutes from "./routes/splits.route.js";
 
 const app = express();
 
