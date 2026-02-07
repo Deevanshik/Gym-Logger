@@ -1,4 +1,5 @@
 import User from "../models/user.models.js";
+import bcrypt from "bcrypt";
 
 export const getUser = async (req, res, next) => {
   try {
@@ -52,15 +53,17 @@ export const updateUser = async (req, res, next) => {
 export const changeUserPassword = async (req, res, next) => {
   try {
     const { username, email } = req.user;
-    const { newPassword } = req.body;
-
-    console.log(
-      `username: ${username} | email: ${email} | password: ${newPassword}`,
-    );
+    const { oldPassword, newPassword } = req.body;
 
     const user = await User.findOne({ username, email });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
+    }
+    const isPasswordCorrect = await bcrypt.compare(oldPassword, user.password);
+    if (!isPasswordCorrect) {
+      return res.status(401).json({
+        message: "Invalid credentials",
+      });
     }
 
     user.password = newPassword;
@@ -68,7 +71,7 @@ export const changeUserPassword = async (req, res, next) => {
 
     const userResponse = user.toObject();
 
-    res.status(200).json(userResponse);
+    res.status(200).json({ message: "Password Updated successfully!" });
   } catch (error) {
     next(error);
   }
