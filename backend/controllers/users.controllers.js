@@ -1,5 +1,9 @@
 import User from "../models/user.models.js";
 import bcrypt from "bcrypt";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+} from "../utils/generateAccessAndRefreshToken.js";
 
 export const getUser = async (req, res, next) => {
   try {
@@ -30,10 +34,12 @@ export const getUser = async (req, res, next) => {
 
 export const updateUser = async (req, res, next) => {
   try {
-    const { username, email } = req.user;
+    const userId = req.user.id;
     const { newUsername, newEmail } = req.body;
 
-    const user = await User.findOne({ username, email });
+    console.log(userId);
+
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -42,9 +48,11 @@ export const updateUser = async (req, res, next) => {
     user.email = newEmail;
     await user.save();
 
+    const accessToken = generateAccessToken(user);
+
     const userResponse = user.toObject();
 
-    res.status(200).json(userResponse);
+    res.status(200).json({ user: userResponse, accessToken: accessToken });
   } catch (error) {
     next(error);
   }
@@ -52,10 +60,10 @@ export const updateUser = async (req, res, next) => {
 
 export const changeUserPassword = async (req, res, next) => {
   try {
-    const { username, email } = req.user;
+    const userId = req.user.id;
     const { oldPassword, newPassword } = req.body;
 
-    const user = await User.findOne({ username, email });
+    const user = await User.findById(userId).select("+password");
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -66,12 +74,20 @@ export const changeUserPassword = async (req, res, next) => {
       });
     }
 
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
+
+    user.refreshToken = refreshToken;
     user.password = newPassword;
     await user.save();
 
     const userResponse = user.toObject();
 
-    res.status(200).json({ message: "Password Updated successfully!" });
+    res.status(200).json({
+      message: "Password Updated successfully!",
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    });
   } catch (error) {
     next(error);
   }

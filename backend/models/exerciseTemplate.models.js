@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const exerciseTemplateSchema = new mongoose.Schema(
   {
     userId: {
