@@ -9,7 +9,9 @@ export const createSplit = async (req, res, next) => {
       return res.status(400).json({ message: "Split name is required" });
     }
 
-    const existingSplit = Split.findOne({ name });
+    const existingSplit = await Split.findOne({ name });
+
+
     if (existingSplit) {
       return res.status(409).json({
         message: "Split already exists",
