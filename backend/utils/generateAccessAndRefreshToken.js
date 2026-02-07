@@ -6,7 +6,7 @@ export const generateAccessToken = (user) => {
       id: user._id,
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "15m" },
+    { expiresIn: process.env.ACCESS_TOKEN_EXPIRY },
   );
 };
 
@@ -16,6 +16,6 @@ export const generateRefreshToken = (user) => {
       id: user._id,
     },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "7d" },
+    { expiresIn: process.env.REFRESH_TOKEN_EXPIRY },
   );
 };
