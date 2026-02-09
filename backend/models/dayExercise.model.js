@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const dayExerciseSchema = new mongoose.Schema(
   {
     dayId: { type: mongoose.Schema.Types.ObjectId, ref: "Day", required: true },
