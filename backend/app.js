@@ -6,6 +6,7 @@ import splitsRoutes from "./routes/splits.route.js";
 import dayRoutes from "./routes/day.route.js";
 import dayExerciseRoutes from "./routes/dayExercise.route.js";
 import workoutRoutes from "./routes/workout.route.js";
+import workoutExerciseRoutes from "./routes/workoutExercise.route.js";
 
 const app = express();
 
@@ -19,5 +20,6 @@ app.use("/api/splits", splitsRoutes);
 app.use("/api", dayRoutes);
 app.use("/api", dayExerciseRoutes);
 app.use("/api/workouts", workoutRoutes);
+app.use("/api", workoutExerciseRoutes);
 
 export default app;
