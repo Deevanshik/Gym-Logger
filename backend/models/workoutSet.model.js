@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const workoutSetSchema = new mongoose.Schema(
   {
     workoutExerciseId: {
