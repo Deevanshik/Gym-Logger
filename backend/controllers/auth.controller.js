@@ -39,10 +39,14 @@ const loginUser = async (req, res, next) => {
     user.refreshToken = refreshToken;
     await user.save();
 
-    res.status(200).json({
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-    });
+    res
+      .cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        path: "/auth/refresh",
+      })
+      .json({ accessToken });
   } catch (error) {
     next(error);
   }
