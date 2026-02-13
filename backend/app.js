@@ -8,11 +8,13 @@ import dayExerciseRoutes from "./routes/dayExercise.route.js";
 import workoutRoutes from "./routes/workout.route.js";
 import workoutExerciseRoutes from "./routes/workoutExercise.route.js";
 import workoutSetRoutes from "./routes/workoutSet.route.js";
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
