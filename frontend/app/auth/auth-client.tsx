@@ -14,14 +14,17 @@ export default function AuthClientPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Get callback URL from search params (set by middleware)
-
   const handleSocialAuth = async (provider: "google" | "github") => {
     setIsLoading(true);
     setError("");
 
     try {
-      console.log("Logged in with", provider);
+      if (provider === "google") {
+        const data = await authClient.signIn.social({
+          provider: "google",
+          callbackURL: "/dashboard",
+        });
+      }
     } catch (err) {
       setError(
         `Error authenticating with ${provider}: ${
