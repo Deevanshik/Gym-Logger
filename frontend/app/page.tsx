@@ -17,7 +17,7 @@ export default function Home() {
             consistency.
           </p>
           <div className={styles.heroCta}>
-            <Link href="/auth" className={styles.btnPrimary}>
+            <Link href="/dashboard" className={styles.btnPrimary}>
               Start Logging
             </Link>
             <Link href="/dashboard" className={styles.btnGhost}>
