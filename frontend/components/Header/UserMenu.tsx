@@ -3,12 +3,9 @@
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-export default function UserMenu({
-  name,
-}: {
-  name: string;
-}) {
+export default function UserMenu({ name }: { name: string }) {
   const [open, setOpen] = useState(false);
   const initial = name.charAt(0).toUpperCase();
   const router = useRouter();
@@ -28,7 +25,7 @@ export default function UserMenu({
       {/* Avatar */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-9 h-9 rounded-full bg-[#e62e2e] text-[#0d0d0d] flex items-center justify-center text-xl font-bold"
+        className="w-9 h-9 rounded-full bg-[#e62e2e] text-[#0d0d0d] flex items-center justify-center text-xl font-extrabold"
       >
         {initial}
       </button>
@@ -50,6 +47,14 @@ export default function UserMenu({
           </li>
           <li className="px-4 py-2 hover:bg-[#e62e2e] transition-colors cursor-pointer">
             Settings
+          </li>
+          <li className="md:hidden">
+            <Link
+              href="/exercises"
+              className="block px-4 py-2 text-inherit hover:bg-[#e62e2e] transition-colors cursor-pointer"
+            >
+              Show Exercises
+            </Link>
           </li>
           <li
             className="px-4 py-2 text-[#e62e2e] transition-colors cursor-pointer"
