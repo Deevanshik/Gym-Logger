@@ -50,7 +50,7 @@ export default function UserMenu({ name }: { name: string }) {
           </li>
           <li className="md:hidden">
             <Link
-              href="/exercises"
+              href="/exercise-templates"
               className="block px-4 py-2 text-inherit hover:bg-[#e62e2e] transition-colors cursor-pointer"
             >
               Show Exercises
