@@ -178,7 +178,7 @@
 /* ── TITLE ── */
 .cardTitle {
   font-family: "Barlow Condensed", sans-serif;
-  font-size: 1.05rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -188,7 +188,7 @@
 
 /* ── BODY ── */
 .cardText {
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: #555;
   line-height: 1.65;
   font-weight: 300;

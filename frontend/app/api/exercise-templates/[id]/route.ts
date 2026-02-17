@@ -11,9 +11,13 @@ type Params = {
 };
 
 /* GET by ID */
-export async function GET(_: Request, { params }: Params) {
+export async function GET(
+  _: Request,
+  context: { params: Promise<{ id: string }> },
+) {
   await connectDB();
 
+  const { id } = await context.params;
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -23,7 +27,7 @@ export async function GET(_: Request, { params }: Params) {
   }
 
   const template = await ExerciseTemplate.findOne({
-    _id: params.id,
+    _id: id,
     userId: session.user.id,
   });
 

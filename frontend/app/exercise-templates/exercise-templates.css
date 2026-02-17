@@ -1,0 +1,46 @@
+/* exercise-templates/exercise-templates.css */
+
+.et-search {
+  width: 100%;
+  max-width: 420px;
+  padding: 0.6rem 1rem;
+  border: 1px solid #2e2e2e;
+  background: #111;
+  color: #e8e8e8;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.et-search:focus { border-color: #e62e2e; }
+
+/* Clickable card override — pointer cursor + hover lift */
+.et-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.et-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+.et-tag {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  font-size: 1rem;
+  color: #aaa;
+  margin-top: 0.4rem;
+}
+
+.et-cue-count { color: #666; font-size: 0.8rem; margin-top: 0.3rem; }
+.et-muted     { color: #666; font-size: 0.9rem; }
+.et-error     { color: #e05c5c; font-size: 0.9rem; }
+
+.et-empty       { padding: 2rem 0; }
+.et-empty-title { font-size: 1rem; font-weight: 600; color: #ccc; margin-bottom: 0.4rem; }
