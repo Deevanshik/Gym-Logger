@@ -44,3 +44,40 @@
 
 .et-empty       { padding: 2rem 0; }
 .et-empty-title { font-size: 1rem; font-weight: 600; color: #ccc; margin-bottom: 0.4rem; }
+
+.et-delete-all {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid #1e1e1e;
+  max-width: 420px;
+}
+
+.et-btn-delete-all {
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(224, 92, 92, 0.4);
+  background: transparent;
+  color: #e05c5c;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.et-btn-delete-all:hover:not(:disabled) { background: rgba(224, 92, 92, 0.1); }
+.et-btn-delete-all:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.et-delete-confirm         { display: flex; flex-direction: column; gap: 0.75rem; }
+.et-delete-confirm-text    { font-size: 0.875rem; color: #aaa; }
+.et-delete-confirm-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.et-btn-cancel {
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid #2e2e2e;
+  background: transparent;
+  color: #aaa;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.et-btn-cancel:hover:not(:disabled) { background: #1a1a1a; }
+.et-btn-cancel:disabled { opacity: 0.5; cursor: not-allowed; }

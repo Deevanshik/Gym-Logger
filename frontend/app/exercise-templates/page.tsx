@@ -18,6 +18,25 @@ export default function ExerciseTemplatesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDeleteAll = async () => {
+    setDeleting(true);
+    try {
+      await Promise.all(
+        templates.map((t) =>
+          fetch(`/api/exercise-templates/${t._id}`, { method: "DELETE" }),
+        ),
+      );
+      setTemplates([]);
+      setDeleteConfirm(false);
+    } catch {
+      setError("Failed to delete all templates.");
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   useEffect(() => {
     const fetchTemplates = async () => {
@@ -37,13 +56,12 @@ export default function ExerciseTemplatesPage() {
   const filtered = templates.filter(
     (t) =>
       t.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      t.primaryMuscleGroup.toLowerCase().includes(searchQuery.toLowerCase())
+      t.primaryMuscleGroup.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
     <div className={styles.homeRoot}>
       <main className={styles.homeMain}>
-
         {/* ── Hero ── */}
         <section className={styles.hero}>
           <span className={styles.heroEyebrow}>
@@ -55,7 +73,10 @@ export default function ExerciseTemplatesPage() {
             program.
           </p>
           <div className={styles.heroCta}>
-            <Link href="/exercise-templates/create" className={styles.btnPrimary}>
+            <Link
+              href="/exercise-templates/create"
+              className={styles.btnPrimary}
+            >
               + New Template
             </Link>
             <Link href="/dashboard" className={styles.btnGhost}>
@@ -69,7 +90,9 @@ export default function ExerciseTemplatesPage() {
           <div className={styles.sectionHeader}>
             <p className={styles.sectionLabel}>Your Library</p>
             <h2 className={styles.sectionTitle}>All Exercises</h2>
-            <p className={styles.sectionSub}>{templates.length} templates saved</p>
+            <p className={styles.sectionSub}>
+              {templates.length} templates saved
+            </p>
           </div>
 
           <input
@@ -81,7 +104,7 @@ export default function ExerciseTemplatesPage() {
           />
 
           {loading && <p className="et-muted">Loading templates…</p>}
-          {error   && <p className="et-error">{error}</p>}
+          {error && <p className="et-error">{error}</p>}
 
           {!loading && !error && filtered.length === 0 && (
             <div className="et-empty">
@@ -120,8 +143,43 @@ export default function ExerciseTemplatesPage() {
               ))}
             </div>
           )}
-        </section>
 
+          {!loading && templates.length > 0 && (
+            <div className="et-delete-all">
+              {!deleteConfirm ? (
+                <button
+                  className="et-btn-delete-all"
+                  onClick={() => setDeleteConfirm(true)}
+                >
+                  Delete All
+                </button>
+              ) : (
+                <div className="et-delete-confirm">
+                  <p className="et-delete-confirm-text">
+                    Delete all {templates.length} exercises? This cannot be
+                    undone.
+                  </p>
+                  <div className="et-delete-confirm-actions">
+                    <button
+                      className="et-btn-delete-all"
+                      onClick={handleDeleteAll}
+                      disabled={deleting}
+                    >
+                      {deleting ? "Deleting…" : "Yes, Delete All"}
+                    </button>
+                    <button
+                      className="et-btn-cancel"
+                      onClick={() => setDeleteConfirm(false)}
+                      disabled={deleting}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </section>
       </main>
     </div>
   );

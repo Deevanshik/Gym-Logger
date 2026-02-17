@@ -2,6 +2,7 @@ import Header from "@/components/Header/Header";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { seedDefaultTemplates } from "@/lib/seedDefaultTemplates";
 
 export default async function DashboardPage() {
   const session = await auth.api.getSession({
@@ -11,6 +12,17 @@ export default async function DashboardPage() {
   if (!session) {
     redirect("/auth");
   }
+  console.log("Default seeding: ", session.user.defaultSeeding);
+  if (!session.user.defaultSeeding) {
+    await seedDefaultTemplates(session.user.id as string);
+    await auth.api.updateUser({
+      headers: await headers(),
+      body: {
+        defaultSeeding: true,
+      },
+    });
+  }
+
   return (
     <div className="p-6 space-y-6">
       <Header />
